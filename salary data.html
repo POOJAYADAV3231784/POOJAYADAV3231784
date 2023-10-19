@@ -1,0 +1,90 @@
+<html>
+<head>
+<title>dynamic tables</title>
+<script>
+var i=1;
+var gt=0;
+var d;
+var fp;
+var gst;
+var ap;
+function abc()
+{
+var t=document.getElementById("a");
+var r=t.insertRow(i);
+var c1=r.insertCell(0);
+var c2=r.insertCell(1);
+var c3=r.insertCell(2);
+var c4=r.insertCell(3);
+var c5=r.insertCell(4);
+var c6=r.insertCell(5);
+c1.innerHTML=i;
+c2.innerHTML="<input type='text'>";
+c3.innerHTML="<input type='text'>";
+c4.innerHTML="<input type='text'>";
+c5.innerHTML="<input type='text' onclick='total(this);' readonly>";
+c6.innerHTML="<input type='button' value='delete item' onclick='del(this);'>";
+i=i+1;
+}
+
+function total(id)
+{
+var t=document.getElementById("a");
+var z=id.parentNode.parentNode.rowIndex;
+var p=parseFloat(t.rows[z].cells[2].children[0].value);
+var q=parseFloat(t.rows[z].cells[3].children[0].value);
+var tot=p*q;
+
+
+
+
+t.rows[z].cells[4].children[0].value=tot.toFixed(2);
+document.getElementById("b").innerHTML="Grand Total:Rs"+gt.toFixed(2)+"<br>"+"Discount:Rs"+d.toFixed(2)+"<br>"+"Final Payment:Rs"+fp.toFixed(2)+"<br>"+"CGST:Rs"+gst.toFixed(2)+"<br>"+"SGST:Rs"+gst.toFixed(2)+"<br>"+"Amount To Pay:Rs"+ap.toFixed(2);
+}
+
+function print1()
+{
+window.print();
+}
+function del(id)
+{
+var j;
+var t=document.getElementById("a");
+var z=id.parentNode.parentNode.rowIndex;
+var tot=parseFloat(t.rows[z].cells[4].children[0].value);
+document.getElementById("b").innerHTML="Grand Total:Rs"+gt.toFixed(2);
+t.deleteRow(z);
+i=i-1;
+for(j=1;j<=i;j++)
+{
+t.rows[j].cells[0].innerHTML=j;
+}
+}
+
+
+
+
+
+
+
+</script>
+</head>
+<body>
+<table border=2 align="center" width=100% id="a" bgcolor="pink">
+	<tr bgcolor="red" align="center">
+		<td>S.no</td>
+		<td>Candidate name</td>
+		<td>salary</td>
+		<td>month</td>
+		<td>Total</td>
+		<td>Delete canditate</td>
+	</tr>
+</table>
+<center>
+<input type="button" value="add item" onclick="abc();"><input type="button" value="print bill" onclick="print1();">
+</center>
+<center>
+<p id="b"></p>
+</center>
+</body>
+</html>
